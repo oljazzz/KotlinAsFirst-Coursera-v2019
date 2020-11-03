@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -117,7 +118,49 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+/**
+ * a<(b+c)) and (b<(a+c)) and (c<(a+b)
+ *
+ * */
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+
+    val a1: Double
+    val b1: Double
+    val c1: Double
+    if ((a < (b + c)) && (b < (a + c)) && (c < (a + b))) {
+        if (a > b) {
+            if (a > c) {
+                c1 = a
+                a1 = c
+                b1 = b
+            } else {
+                c1 = c
+                a1 = a
+                b1 = b
+            }
+        } else {
+            if (b > c) {
+                c1 = b
+                a1 = a
+                b1 = c
+            } else {
+                c1 = c
+                a1 = a
+                b1 = b
+            }
+        }
+        val cos = (sqr(a1) + sqr(b1) - sqr(c1)) / 2 * a * b
+        return when {
+            cos < 0 -> {
+                2
+            }
+            cos == 0.0 -> {
+                1
+            }
+            else -> 0
+        }
+    } else return -1
+}
 
 /**
  * Средняя
