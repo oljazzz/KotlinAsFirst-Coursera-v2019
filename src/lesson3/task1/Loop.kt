@@ -67,7 +67,17 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
+    do {
+        number /= 10
+        count++
+
+    } while (number > 0)
+    return count
+}
+
 
 /**
  * Простая
@@ -75,7 +85,15 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int = fibIter(1, 0, n)
+
+
+fun fibIter(a: Int, b: Int, count: Int): Int {
+    if (count == 0) {
+        return b
+    }
+    return fibIter(a + b, a, count - 1)
+}
 
 /**
  * Простая
@@ -133,7 +151,13 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    return when {
+        x == 1 -> 0
+        x % 2 == 0 -> 1 + collatzSteps(x / 2)
+        else -> 1 + collatzSteps(3 * x + 1)
+    }
+}
 
 /**
  * Средняя
@@ -164,7 +188,15 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var rev = 0
+    var n1 = n
+    while (n1 > 0) {
+        rev = (rev * 10) + (n1 % 10)
+        n1 /= 10
+    }
+    return rev
+}
 
 /**
  * Средняя
@@ -175,7 +207,10 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    val revertedNumber = revert(n)
+    return n == revertedNumber
+}
 
 /**
  * Средняя
