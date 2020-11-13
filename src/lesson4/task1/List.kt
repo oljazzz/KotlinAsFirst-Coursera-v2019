@@ -132,7 +132,20 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+
+    if (list.size == 0) return list
+    var sum = 0.0
+    for (i in 0 until list.size) {
+        sum += list[i]
+    }
+    val centered = sum / list.size
+    for (i in 0 until list.size) {
+        list[i] = list[i] - centered
+    }
+    return list
+}
+
 
 /**
  * Средняя
@@ -181,7 +194,27 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    var number = n
+    var result = ""
+
+    while (number % 2 == 0) {
+        result = result.plus(2).plus("*")
+        number /= 2
+    }
+    var i = 3
+    while (i <= sqrt(number.toDouble())) {
+        while (number % i == 0) {
+            result = result.plus(i).plus("*")
+            number /= i
+        }
+        i += 2
+    }
+    if (number > 2) {
+        result = result.plus(number)
+    }
+    return result.trim('*')
+}
 
 /**
  * Средняя
