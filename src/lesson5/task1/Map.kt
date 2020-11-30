@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import ru.spbstu.wheels.getEntry
+
 /**
  * Пример
  *
@@ -257,7 +259,27 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    if (list.isEmpty()) return Pair(-1, -1)
+    val sortedList = list.sorted()
+    var l = 0
+    var r = sortedList.size - 1
+    while (l < r) {
+        val sum = sortedList.elementAt(l) + sortedList.elementAt(r)
+        when {
+            sum == number -> {
+                return Pair(l, r)
+            }
+            sum < number -> {
+                l++
+            }
+            else -> {
+                r--
+            }
+        }
+    }
+    return Pair(-1, -1);
+}
 
 /**
  * Очень сложная
